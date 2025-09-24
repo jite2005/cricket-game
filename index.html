@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    <link rel="stylesheet" href="style.css" />
+    
+    <title>cricket Game</title>
+    <style>
+      h1 {
+        text-align: center;
+        margin-top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Bat Ball Stump Game</h1>
+    <div class="container">
+      <p id="display">Let's Play</p>
+      <h2 style="color: wheat; margin-bottom: 0px">Score:-</h2>
+      <div id="score">0</div>
+      <br />
+
+      <button
+        onclick="
+    computerChoice=computerChoiceGen();
+    resultMsg=getResult('Bat',computerChoice);
+    showResult('Bat',computerChoice,resultMsg);
+    "
+      >
+        <img src="images/bat.webp" class="images-ch" alt="Bat image" />
+      </button>
+      <button
+        onclick="
+    computerChoice=computerChoiceGen();
+    resultMsg=getResult('Ball',computerChoice);
+    showResult('Ball',computerChoice,resultMsg);
+    "
+      >
+        <img
+          src="images/cricketball.png"
+          class="images-ch"
+          alt="Ball image"
+        />
+      </button>
+      <button
+        onclick="
+    computerChoice=computerChoiceGen();
+    resultMsg=getResult('Stump',computerChoice);
+    showResult('Stump',computerChoice,resultMsg);
+    "
+      >
+        <img
+          src="images/club-stumps_club-hardwood_02-removebg-preview.png"
+          class="images-ch"
+          alt="Stump image"
+        />
+      </button>
+      <button
+        onclick="localStorage.clear();
+      resetScore();
+      showResult();
+      "
+      >
+        <img src="images/reset.png" class="images-ch" alt="Bat image" />
+      </button>
+    </div>
+    
+
+    <script>
+      let computerChoice;
+      // Your current code
+      let score;
+      resetScore();
+
+      function resetScore() {
+        let scoreStr = localStorage.getItem("lcScore");
+        score = scoreStr
+          ? JSON.parse(scoreStr)
+          : {
+              win: 0,
+              lost: 0,
+              tie: 0,
+            };
+
+        // Add display method
+        score.displayScore = function () {
+          document.querySelector("#display").innerText = result;
+          let finalScore = `Won : ${score.win}
+Lost : ${score.lost}
+Tie : ${score.tie}`;
+          document.querySelector("#score").innerText = finalScore;
+        };
+      }
+
+      function computerChoiceGen() {
+        computerChoice;
+        let randomNumber = Math.random() * 3;
+        if (randomNumber > 0 && randomNumber <= 1) {
+          return "Bat";
+        } else if (randomNumber > 1 && randomNumber <= 2) {
+          return "Ball";
+        } else {
+          return "Stump";
+        }
+      }
+      function getResult(userMove, ComputerMove) {
+        if (userMove === "Bat") {
+          if (ComputerMove === "Ball") {
+            score.win++;
+            return "User won";
+          } else if (ComputerMove === "Bat") {
+            score.tie++;
+            return `It's a tie`;
+          } else if (ComputerMove === "Stump") {
+            score.lost++;
+            return "Computer has won";
+          }
+        } else if (userMove === "Ball") {
+          if (ComputerMove === "Ball") {
+            score.tie++;
+            return `It's a tie`;
+          } else if (ComputerMove === "Bat") {
+            score.lost++;
+            return "Computer has won";
+          } else if (ComputerMove === "Stump") {
+            score.win++;
+            return "User won";
+          }
+        } else {
+          if (ComputerMove === "Ball") {
+            score.lost++;
+            return "Computer has won";
+          } else if (ComputerMove === "Bat") {
+            score.win++;
+            return "User won";
+          } else if (ComputerMove === "Stump") {
+            score.tie++;
+            return `It's a tie`;
+          }
+        }
+      }
+      function showResult(userMove, computerMove, resultMsg) {
+        localStorage.setItem("lcScore", JSON.stringify(score));
+        if (
+          userMove !== undefined ||
+          computerMove !== undefined ||
+          resultMsg !== undefined
+        ) {
+          result = `You have chosen ${userMove}. Computer choice is ${computerMove} and ${resultMsg}`;
+        } else {
+          result = `Let's Play`;
+        }
+
+        score.displayScore();
+      }
+      showResult();
+    </script>
+  </body>
+</html>
