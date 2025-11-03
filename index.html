@@ -13,24 +13,11 @@
         margin-top: 100px;
       }
       #rules {
-      display: none;
-      background: #f0f8ff;
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 8px;
-      width: 250px;
-      margin-top: 10px;
-    }
-    #hideShow {
-      padding: 8px 15px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    #hideShow:hover {
-      background-color: #0056b3;
+      text-align:center;
+      color:white;
+      margin-bottom:30px;
+        font-size:30px;
+        font-weight:600;
     }
     </style>
   </head>
@@ -38,6 +25,15 @@
     
    
     <h1>Bat Ball Stump Game</h1>
+    <div id="rules">
+  <p>Choose <b>Bat</b>, <b>Ball</b>, or <b>Stump</b>.</p>
+  <ul>
+    <li>Same choice → Tie</li>
+    <li>Bat beats Ball ✅</li>
+    <li>Ball beats Stump ✅</li>
+    <li>Stump beats Bat ✅</li>
+  </ul>
+</div>
     <div class="container">
       <p id="display">Let's Play</p>
       <h2 style="color: wheat; margin-bottom: 0px">Score:-</h2>
@@ -87,17 +83,7 @@
       >
         <img src="images/reset.png" class="images-ch" alt="Bat image" />
       </button>
-      <button onclick="toggleRules()" id="hideShow" style="height:40px; ">Rules</button>
-
-<div id="rules">
-  <p>Choose <b>Bat</b>, <b>Ball</b>, or <b>Stump</b>.</p>
-  <ul>
-    <li>Same choice → Tie</li>
-    <li>Bat beats Ball ✅</li>
-    <li>Ball beats Stump ✅</li>
-    <li>Stump beats Bat ✅</li>
-  </ul>
-</div>
+      
     </div>
     <footer class="three-column-footer">
   <div class="footer-container">
